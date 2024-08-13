@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Carousel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="carousel-container">
+        <div class="carousel">
+            <img class="carousel-item active" src="1.jpg" id="unique"></img>
+            <img class="carousel-item" src="2.jpg"></img>
+            <img class="carousel-item" src="4.jpg"></img>
+            <img class="carousel-item" src="3.jpg"></img>
+        </div>
+        <div class="carousel-controls">
+            <span class="carousel-control prev">&lt;</span>
+            <span class="carousel-control next">&gt;</span>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const carousel = document.querySelector('.carousel');
+            const items = document.querySelectorAll('.carousel-item');
+            const prev = document.querySelector('.carousel-control.prev');
+            const next = document.querySelector('.carousel-control.next');
+            let currentIndex = 0;
+            //const intervalTime = 10000; // 10 seconds
+
+            function updateCarousel() {
+                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+
+            function showNextItem() {
+                currentIndex = (currentIndex + 1) % items.length;
+                updateCarousel();
+            }
+
+            function showPrevItem() {
+                currentIndex = (currentIndex - 1 + items.length) % items.length;
+                updateCarousel();
+            }
+
+            prev.addEventListener('click', showPrevItem);
+            next.addEventListener('click', showNextItem);
+
+            setInterval(showNextItem, intervalTime);
+        });
+    </script>
+</body>
+</html>
